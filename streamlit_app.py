@@ -46,7 +46,7 @@ with st.expander('**Tentang Website Ini**'):
   st.info('Website ini hanya menampilkan hasil prediksi oleh model LSTM yang sudah dilatih sebelumnya.')
 
   st.markdown('**Bagaimana cara menggunakan Website ini?**')
-  st.warning('Untuk menjalankan website ini cukup sederhana, pengguna hanya perlu scroll ke bawah lalu klik tombol **MULAI** untuk memulai proses inisialisasi model.  Sebagai hasilnya, website ini akan secara otomatis melakukan semua tahapan proses membangun model LSTM, dan menampilkan hasil prediksi model, evaluasi model, parameter model, dan dataset yang digunakan oleh model.')
+  st.warning('Untuk menjalankan website ini cukup sederhana, pengguna hanya perlu mengatur parameter **jumlah hari** yang ingin diprediksi lalu scroll ke bawah lalu klik tombol **MULAI** untuk memulai proses inisialisasi model.  Sebagai hasilnya, website ini akan secara otomatis melakukan semua tahapan proses membangun model LSTM, dan menampilkan hasil prediksi model, evaluasi model, parameter model, dan dataset yang digunakan oleh model.')
 
   st.markdown('**Informasi tambahan**')
   st.markdown('Dataset:')
@@ -84,7 +84,7 @@ with st.sidebar:
         st.button('**Github**')
 
     st.header('Parameters')
-    future = st.slider('Jumlah hari yang ingin diprediksi', 5, 400, 30, 5)
+    future = st.slider('Jumlah hari yang ingin diprediksi', 5, 400, 365, 5)
 
     sleep_time = st.slider('Sleep time', 0, 3, 0)
     
@@ -351,10 +351,10 @@ if example_data:
 
     # Download Zip dataset files
     climate_data.to_csv('dataset.csv', index=False)
-    X_train.to_csv('X_train.csv', index=False)
-    y_train.to_csv('y_train.csv', index=False)
-    X_test.to_csv('X_test.csv', index=False)
-    y_test.to_csv('y_test.csv', index=False)
+    data_latih_x.to_csv('data_latih_x.csv', index=False)
+    data_latih_y.to_csv('data_latih_y.csv', index=False)
+    data_test_x.to_csv('data_test_x.csv', index=False)
+    data_test_y.to_csv('data_test_y.csv', index=False)
     
     list_files = ['dataset.csv', 'X_train.csv', 'y_train.csv', 'X_test.csv', 'y_test.csv']
     with zipfile.ZipFile('dataset.zip', 'w') as zipF:
@@ -363,7 +363,7 @@ if example_data:
 
     with open('dataset.zip', 'rb') as datazip:
         btn = st.download_button(
-                label='Download ZIP',
+                label='Download Data ZIP',
                 data=datazip,
                 file_name="dataset.zip",
                 mime="application/octet-stream"
@@ -406,7 +406,7 @@ if example_data:
     plt.legend()
 
     with st.expander('Akurasi Pengujian'):
-            st.pyplot(plt)
+            st.pyplot(plt, use_container_width=True)
 
     # Prediction results
     st.header('Hasil Prediksi', divider='rainbow')
@@ -448,7 +448,7 @@ if example_data:
     # Display scatter plot of actual vs predicted values
     with prediction_col[2]:
         st.markdown('Visualisasi')
-        st.pyplot(plt)
+        st.pyplot(plt, use_container_width=True)
 
     
 # Ask for CSV upload if none is detected
