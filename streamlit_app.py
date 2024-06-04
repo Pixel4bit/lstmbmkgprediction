@@ -84,7 +84,7 @@ with st.sidebar:
         st.button('**Github**')
 
     st.header('Parameters')
-    future = st.slider('Jumlah hari yang ingin diprediksi', 5, 400, 365, 5)
+    future = st.slider('Jumlah hari yang ingin diprediksi', 5, 390, 365, 5)
 
     sleep_time = st.slider('Sleep time', 0, 3, 0)
     
