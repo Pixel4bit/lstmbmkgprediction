@@ -356,7 +356,7 @@ if example_data:
     data_test_x.to_csv('data_test_x.csv', index=False)
     data_test_y.to_csv('data_test_y.csv', index=False)
     
-    list_files = ['dataset.csv', 'X_train.csv', 'y_train.csv', 'X_test.csv', 'y_test.csv']
+    list_files = ['dataset.csv', 'data_latih_x.csv', 'data_latih_y.csv', 'data_test_x.csv', 'data_test_y.csv']
     with zipfile.ZipFile('dataset.zip', 'w') as zipF:
         for file in list_files:
             zipF.write(file, compress_type=zipfile.ZIP_DEFLATED)
