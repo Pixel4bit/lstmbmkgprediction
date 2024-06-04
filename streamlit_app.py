@@ -38,13 +38,13 @@ batch = 32
 val = 10
 
 # Page title
-st.set_page_config(page_title='BMKG LSTM Prediction', page_icon='📈')
+st.set_page_config(page_title='BMKG Prediction with Deep Learning algorithm', page_icon='📈')
 st.title('📈 BMKG LSTM Prediction')
 
 # Expander
 with st.expander('🌐 **Tentang Website Ini**'):
   st.markdown('**Apa yang dilakukan website ini?**')
-  st.info('Website ini hanya menampilkan hasil prediksi oleh model LSTM yang sudah dilatih sebelumnya.')
+  st.info('Website ini akan menampilkan hasil prediksi oleh model deep learning dengan LSTM yang sudah dilatih sebelumnya.')
 
   st.markdown('**Bagaimana cara menggunakan Website ini?**')
   st.warning('Untuk menjalankan website ini cukup sederhana, pengguna hanya perlu mengatur parameter **jumlah hari** yang ingin diprediksi lalu scroll ke bawah lalu klik tombol **MULAI** untuk memulai proses inisialisasi model.  Sebagai hasilnya, website ini akan secara otomatis melakukan semua tahapan proses membangun model LSTM, dan menampilkan hasil prediksi model, evaluasi model, parameter model, dan dataset yang digunakan oleh model.')
