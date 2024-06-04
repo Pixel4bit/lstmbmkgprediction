@@ -38,8 +38,8 @@ batch = 32
 val = 10
 
 # Page title
-st.set_page_config(page_title='BMKG Prediction with Deep Learning algorithm', page_icon='📈')
-st.title('📈 BMKG LSTM Prediction')
+st.set_page_config(page_title='BMKG LSTM Prediction', page_icon='📈')
+st.title('📈 BMKG Prediction with Deep Learning algorithm')
 
 # Expander
 with st.expander('🌐 **Tentang Website Ini**'):
