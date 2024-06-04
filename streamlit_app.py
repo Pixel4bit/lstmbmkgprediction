@@ -29,9 +29,10 @@ data_test_x = pd.read_csv('https://raw.githubusercontent.com/Pixel4bit/Data-BMKG
 data_test_y = pd.read_csv('https://raw.githubusercontent.com/Pixel4bit/Data-BMKG/main/hasil/csv/data_tes_y.csv')
 metrics_latih = pd.read_csv('https://raw.githubusercontent.com/Pixel4bit/Data-BMKG/main/hasil/csv/metrics_latih.csv')
 metrics_uji = pd.read_csv('https://raw.githubusercontent.com/Pixel4bit/Data-BMKG/main/hasil/csv/metrics_uji.csv')
+dataX = pd.read_csv('https://raw.githubusercontent.com/Pixel4bit/Data-BMKG/main/hasil/csv/dataX.csv')
 
 
-
+size_latih = 90
 epoch = 75
 batch = 32
 val = 10
@@ -41,7 +42,7 @@ st.set_page_config(page_title='BMKG LSTM Prediction', page_icon='📈')
 st.title('📈 BMKG LSTM Prediction')
 
 # Expander
-with st.expander('**Tentang Website Ini**'):
+with st.expander('🌐 **Tentang Website Ini**'):
   st.markdown('**Apa yang dilakukan website ini?**')
   st.info('Website ini hanya menampilkan hasil prediksi oleh model LSTM yang sudah dilatih sebelumnya.')
 
@@ -64,7 +65,7 @@ with st.expander('**Tentang Website Ini**'):
 
 
 
-with st.expander('**Inisialisasi Model LSTM**'):
+with st.expander('🤖 **Inisialisasi Model LSTM**', expanded=True):
     st.info('Klik tombol MULAI dibawah ini untuk memulai proses inisialisasi model')
     example_data = st.button('MULAI')
     if example_data:
@@ -105,6 +106,7 @@ if example_data:
         
         # Reading data
         st.write("Loading data ...")
+        waktu_mulai = time.time()
         time.sleep(sleep_time)
 
         # preprocessing data
@@ -319,8 +321,13 @@ if example_data:
             rf_results[col] = pd.to_numeric(rf_results[col], errors='ignore')
         # Round to 3 digits
         rf_results = rf_results.round(3)
+
+
+        waktu_berakhir = time.time()
+        durasi = float(waktu_berakhir - waktu_mulai)
         
     status.update(label="Status", state="complete", expanded=False)
+    st.write(f'*Running time: {round(durasi, 2)} detik*')
 
     # Display data info
     st.header('Input data', divider='rainbow')
@@ -349,6 +356,17 @@ if example_data:
             st.markdown('**y**')
             st.dataframe(data_test_y, height=210, hide_index=True, use_container_width=True)
 
+    plt.figure(figsize= (10, 3))
+    plt.title('Perbandingan Data latih dan Data Uji')
+    plt.plot(climate_data['Tx'][:train_size], label='Data Latih')
+    plt.plot(climate_data['Tx'][train_size:], label='Data Uji')
+    plt.xlabel('Tahun')
+    plt.ylabel('Suhu')
+    plt.legend()
+
+    with st.expander('Perbandingan Data latih dan Uji'):
+        st.pyplot(plt, use_container_width=True)
+
     # Download Zip dataset files
     climate_data.to_csv('dataset.csv', index=False)
     data_latih_x.to_csv('data_latih_x.csv', index=False)
@@ -372,10 +390,10 @@ if example_data:
     # Display model parameters
     st.header('Model parameters', divider='rainbow')
     parameters_col = st.columns(4)
-    parameters_col[0].metric(label="Rasio Pelatihan (%)", value=90, delta="")
+    parameters_col[0].metric(label="Rasio Pelatihan", value=f'{size_latih}%', delta="")
     parameters_col[1].metric(label="Jumlah Epoch", value=epoch, delta="")
     parameters_col[2].metric(label="Batch Size", value=batch, delta="")
-    parameters_col[3].metric(label="Rasio Validasi (%)", value=val, delta="")
+    parameters_col[3].metric(label="Rasio Validasi", value=f'{val}%', delta="")
     
     # Display feature importance plot
     importances = rf.feature_importances_
@@ -398,9 +416,20 @@ if example_data:
         st.dataframe(metrics_uji, use_container_width=True)
 
     plt.figure(figsize=(10, 3))
+    plt.plot(dataX['Aktual'][::10], label='Aktual')
+    plt.plot(dataX['Prediksi'][::10], label='Prediksi')
+    plt.title('Perbandingan Data Latih Aktual vs Prediksi')
+    plt.xlabel('Jumlah Data')
+    plt.ylabel('Suhu')
+    plt.legend()
+
+    with st.expander('Akurasi Pelatihan'):
+            st.pyplot(plt, use_container_width=True)
+
+    plt.figure(figsize=(10, 3))
     plt.plot(dataY['Aktual'], label='Aktual')
     plt.plot(dataY['Prediksi'], label='Prediksi')
-    plt.title('Perbandingan Aktual vs Prediksi')
+    plt.title('Perbandingan Data Uji Aktual vs Prediksi')
     plt.xlabel('Jumlah Data')
     plt.ylabel('Suhu')
     plt.legend()
@@ -413,9 +442,9 @@ if example_data:
 
     col = st.columns(4)
     col[0].metric(label="Jumlah Hari", value=future, delta="")
-    col[1].metric(label="Suhu Terendah", value=round(float(data_hasil.min()), 2), delta="")
-    col[2].metric(label="Suhu Tertinggi", value=round(float(data_hasil.max()), 2), delta="")
-    col[3].metric(label="Suhu Rata-rata", value=round(float(data_hasil.mean()), 2), delta="")
+    col[1].metric(label="Suhu Terendah", value=f'{round(float(data_hasil.min()), 2)}°', delta="")
+    col[2].metric(label="Suhu Tertinggi", value=f'{round(float(data_hasil.max()), 2)}°', delta="")
+    col[3].metric(label="Suhu Rata-rata", value=f'{round(float(data_hasil.mean()), 2)}°', delta="")
 
 
     s_y_train = pd.Series(y_train, name='actual').reset_index(drop=True)
