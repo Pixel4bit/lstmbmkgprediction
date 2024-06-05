@@ -48,7 +48,8 @@ with st.expander('🌐 **Tentang Website Ini**'):
   st.markdown('**Informasi tambahan**')
   st.markdown('Dataset:')
   st.code('''- Data Iklim harian BMKG Stasiun Meteorologi Kemayoran Jakarta Pusat
-- Rentang Waktu dataset: 01 Januari 2013 s.d 01 Februari 2024
+- Rentang Waktu: 01 Januari 2013 s.d 01 Februari 2024
+- Sumber: https://dataonline.bmkg.go.id/
   ''', language='markdown')
   
   st.markdown('Library yang digunakan:')
