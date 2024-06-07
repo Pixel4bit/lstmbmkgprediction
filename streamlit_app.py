@@ -1,7 +1,3 @@
-# Parameter default
-# link = https://raw.githubusercontent.com/dataprofessor/data/master/delaney_solubility_with_descriptors.csv
-# 
-
 import streamlit as st
 
 import pandas as pd
@@ -23,9 +19,8 @@ data_latih_x = pd.read_csv('https://raw.githubusercontent.com/Pixel4bit/Data-BMK
 data_latih_y = pd.read_csv('https://raw.githubusercontent.com/Pixel4bit/Data-BMKG/main/hasil/csv/data_latih_y.csv')
 data_test_x = pd.read_csv('https://raw.githubusercontent.com/Pixel4bit/Data-BMKG/main/hasil/csv/data_tes_x.csv')
 data_test_y = pd.read_csv('https://raw.githubusercontent.com/Pixel4bit/Data-BMKG/main/hasil/csv/data_tes_y.csv')
-metrics_latih = pd.read_csv('https://raw.githubusercontent.com/Pixel4bit/Data-BMKG/main/hasil/csv/metrics_latih.csv')
-metrics_uji = pd.read_csv('https://raw.githubusercontent.com/Pixel4bit/Data-BMKG/main/hasil/csv/metrics_uji.csv')
-dataX = pd.read_csv('https://raw.githubusercontent.com/Pixel4bit/Data-BMKG/main/hasil/csv/dataX.csv')
+data_februari = 'https://raw.githubusercontent.com/Pixel4bit/Data-BMKG/main/Raw_Dataset_BMKG_2013_2024_Jakarta_Pusat.csv'
+data_juni = 'https://raw.githubusercontent.com/Pixel4bit/Data-BMKG/main/dataset_2024-6/raw_dataset_bmkg_2013_2024-06_jakarta_pusat.csv'
 
 
 size_latih = 90
@@ -76,6 +71,11 @@ with st.sidebar:
     
     with st.expander('**Tentang Kami**'):
         st.info('Website ini dibuat oleh tiga mahasiswa dari Universitas Bina Sarana Informatika Prodi S1 Sistem Informasi')
+        st.code('''Pengembang:
+Ahmad Haitami Hatta
+Alvian Ibnu Farhan
+Dzulfiqar Ramazan
+''', )
 
     with st.expander('**Project**'):
         st.markdown('**Deep Learning**')
@@ -83,6 +83,11 @@ with st.sidebar:
         st.button('**Github**')
 
     st.header('Parameters')
+
+    n_data = st.checkbox('Update Data')
+    if n_data == True:
+        st.markdown('*Data terupdate ke bulan Juni 2024*')
+
     future = st.slider('Jumlah hari yang ingin diprediksi ke masa depan', 5, 365, 365, 5)
     
     n_past = st.slider('Pola data masa lalu yang akan dipelajari oleh model LSTM', 5, 40, 14, 1)
@@ -97,6 +102,11 @@ if example_data:
         st.write("Loading data ...")
         waktu_mulai = time.time()
         time.sleep(sleep_time)
+
+        if n_data == True:
+            climate_data = pd.read_csv(data_juni)
+        else:
+            climate_data = pd.read_csv(data_februari)
 
         # preprocessing data
         st.write("Preparing data ...")
@@ -221,7 +231,9 @@ if example_data:
 
         mean_asli = climate_data['Tx'].mean() # mengambil nilai rata-rata dari kolom "Suhu tertinggi"
         mean_prediksi = data_hasil['Prediksi'].mean() # mengambil nilai rata-rata dari kolom "Prediksi"
+        anomali_suhu_terendah = data_hasil['Prediksi'].min() - climate_data['Tx'].min()
         anomali_suhu_rata_rata = mean_prediksi - mean_asli
+        anomali_suhu_tertinggi = data_hasil['Prediksi'].max() - climate_data['Tx'].max()
 
         selisih = pd.DataFrame(data=[[mean_prediksi, mean_asli, anomali_suhu_rata_rata]],
                        columns=['Tx_avg_prediksi', 'Tx_avg', 'Selisih / Anomali'])
@@ -291,10 +303,16 @@ if example_data:
     # Display data info
     st.header('Input data', divider='rainbow')
     col = st.columns(4)
-    col[0].metric(label="Jumlah Sampel Data", value=x.shape[0], delta="")
-    col[1].metric(label="Jumlah Variabel", value=climate_data.shape[1], delta="")
-    col[2].metric(label="Jumlah Sampel Pelatihan", value=len(data_untuk_dilatih), delta="")
-    col[3].metric(label="Jumlah Sampel Pengujian", value=len(data_untuk_ditest), delta="")
+    if n_data == True:
+        col[0].metric(label="Jumlah Sampel Data", value=x.shape[0], delta=f"{x.shape[0] - 4049}")
+        col[1].metric(label="Jumlah Variabel", value=climate_data.shape[1], delta=f"{climate_data.shape[1] - 8}")
+        col[2].metric(label="Jumlah Sampel Pelatihan", value=len(data_untuk_dilatih), delta=f"{len(data_untuk_dilatih) - 3644}")
+        col[3].metric(label="Jumlah Sampel Pengujian", value=len(data_untuk_ditest), delta=f"{len(data_untuk_dilatih) - 405}")
+    else:
+        col[0].metric(label="Jumlah Sampel Data", value=x.shape[0], delta="")
+        col[1].metric(label="Jumlah Variabel", value=climate_data.shape[1], delta="")
+        col[2].metric(label="Jumlah Sampel Pelatihan", value=len(data_untuk_dilatih), delta="")
+        col[3].metric(label="Jumlah Sampel Pengujian", value=len(data_untuk_ditest), delta="")
     
     with st.expander('Dataset Awal', expanded=True):
         st.dataframe(climate_data, height=210, use_container_width=True)
@@ -397,9 +415,9 @@ if example_data:
 
     col = st.columns(4)
     col[0].metric(label="Jumlah Hari", value=future, delta="")
-    col[1].metric(label="Suhu Terendah", value=f'{round(float(data_hasil.min()), 2)}°', delta="")
-    col[2].metric(label="Suhu Tertinggi", value=f'{round(float(data_hasil.max()), 2)}°', delta="")
-    col[3].metric(label="Suhu Rata-rata", value=f'{round(float(data_hasil.mean()), 2)}°', delta="")
+    col[1].metric(label="Suhu Terendah", value=f'{round(float(data_hasil.min()), 2)}°', delta=f'{round(anomali_suhu_terendah, 2)}', delta_color="inverse")
+    col[2].metric(label="Suhu Tertinggi", value=f'{round(float(data_hasil.max()), 2)}°', delta=f'{round(anomali_suhu_tertinggi, 2)}', delta_color="inverse")
+    col[3].metric(label="Suhu Rata-rata", value=f'{round(float(data_hasil.mean()), 2)}°', delta=f'{round(anomali_suhu_rata_rata, 2)}', delta_color="inverse")
     
     plt.figure(figsize=(10, 4), dpi=200)
     plt.plot(climate_data['Tx'][2950:], label='Data Historis')
