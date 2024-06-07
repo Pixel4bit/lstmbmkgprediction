@@ -307,7 +307,7 @@ if example_data:
         col[0].metric(label="Jumlah Sampel Data", value=x.shape[0], delta=f"{x.shape[0] - 4049}")
         col[1].metric(label="Jumlah Variabel", value=climate_data.shape[1], delta=f"{climate_data.shape[1] - 8}")
         col[2].metric(label="Jumlah Sampel Pelatihan", value=len(data_untuk_dilatih), delta=f"{len(data_untuk_dilatih) - 3644}")
-        col[3].metric(label="Jumlah Sampel Pengujian", value=len(data_untuk_ditest), delta=f"{len(data_untuk_dilatih) - 405}")
+        col[3].metric(label="Jumlah Sampel Pengujian", value=len(data_untuk_ditest), delta=f"{len(data_untuk_ditest) - 405}")
     else:
         col[0].metric(label="Jumlah Sampel Data", value=x.shape[0], delta="")
         col[1].metric(label="Jumlah Variabel", value=climate_data.shape[1], delta="")
