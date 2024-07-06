@@ -21,7 +21,7 @@ data_test_x = pd.read_csv('https://raw.githubusercontent.com/Pixel4bit/Data-BMKG
 data_test_y = pd.read_csv('https://raw.githubusercontent.com/Pixel4bit/Data-BMKG/main/hasil/csv/data_tes_y.csv')
 data_februari = 'https://raw.githubusercontent.com/Pixel4bit/Data-BMKG/main/Raw_Dataset_BMKG_2013_2024_Jakarta_Pusat.csv'
 data_juni = 'https://raw.githubusercontent.com/Pixel4bit/Data-BMKG/main/dataset_2024-6/raw_dataset_bmkg_2013_2024-06_jakarta_pusat.csv'
-
+data_juli = 'https://raw.githubusercontent.com/Pixel4bit/Data-BMKG/main/dataset_2024-07/raw_dataset_bmkg_2013_2024-07-05_jakarta_pusat.csv'
 
 size_latih = 90
 epoch = 75
@@ -86,7 +86,7 @@ Dzulfiqar Ramazan
 
     n_data = st.checkbox('Update Data')
     if n_data == True:
-        st.markdown('*Data terupdate ke bulan Juni 2024*')
+        st.markdown('*Data terupdate ke bulan Juli 2024*')
 
     future = st.slider('Jumlah hari yang ingin diprediksi ke masa depan', 5, 365, 365, 5)
     
@@ -104,7 +104,7 @@ if example_data:
         time.sleep(sleep_time)
 
         if n_data == True:
-            climate_data = pd.read_csv(data_juni)
+            climate_data = pd.read_csv(data_juli)
         else:
             climate_data = pd.read_csv(data_februari)
 
