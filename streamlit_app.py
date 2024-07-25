@@ -54,7 +54,8 @@ with st.expander('🌐 **Tentang Website Ini**'):
 - NUMPY untuk perhitungan statistik, matriks, dll.
 - KERAS untuk memuat model LSTM yang sudah dilatih
 - SCIKIT-LEARN untuk proses normalisasi data dan evaluasi model LSTM
-- ALTAIR untuk grafik visualisasi
+- MATPLOTLIB untuk grafik visualisasis bawaan
+- PLOTLY untuk grafik visualisasi interaktif
 - STREAMLIT untuk user interface
   ''', language='markdown')
 
