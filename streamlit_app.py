@@ -441,10 +441,10 @@ if example_data:
     # Display scatter plot of actual vs predicted values
     with prediction_col[2]:
         st.markdown('Visualisasi')
-        st.pyplot(plt, use_container_width=True)
-        # st.pyplot(fig, use_container_width=True)
+        # st.pyplot(plt, use_container_width=True)
+        st.plotly_chart(fig, use_container_width=True)
 
-  # UPDATES
+    # UPDATES
     ## Interactive Plot with Plotly Go Scatter
     
     historical_data = climate_data['Tx'][2950:]
