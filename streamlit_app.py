@@ -448,7 +448,7 @@ if example_data:
     # fig.update_layout(yaxis_title='Suhu', xaxis_title='Tanggal', height=600, title="Hasil Prediksi 1 Tahun Ke Masa Depan", title_x=0.5)
     # fig.show()
 
-    # prediction_col = st.columns((2, 0.2, 3))
+    prediction_col = st.columns((2, 0.2, 3))
     
     # Display dataframe
     with prediction_col[0]:
