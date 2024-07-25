@@ -451,7 +451,7 @@ if example_data:
     st.plotly_chart(fig, use_container_width=True)
 
     st.markdown('Data Hasil Prediksi')
-    st.dataframe(data_hasil, width=600)
+    st.dataframe(data_hasil, use_container_width=True)
     
     prediction_col = st.columns((2, 0.2, 3))
     # Display dataframe
