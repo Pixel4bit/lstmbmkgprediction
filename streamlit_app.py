@@ -431,7 +431,18 @@ if example_data:
     plt.ylabel('Suhu')
     plt.legend()
 
-    # UPDATES
+    # Display dataframe
+    with prediction_col[0]:
+        st.markdown('Data Prediksi')
+        st.dataframe(data_hasil, height=320, use_container_width=True)
+
+    # Display scatter plot of actual vs predicted values
+    with prediction_col[2]:
+        st.markdown('Visualisasi')
+        st.pyplot(plt, use_container_width=True)
+        # st.pyplot(fig, use_container_width=True)
+
+  # UPDATES
     ## Interactive Plot with Plotly Go Scatter
     
     historical_data = climate_data['Tx'][2950:]
@@ -446,20 +457,6 @@ if example_data:
     
     fig.update_traces(line=dict(width=2))  # Customize line width
     fig.update_layout(yaxis_title='Suhu', xaxis_title='Tanggal', height=600, title="Hasil Prediksi 1 Tahun Ke Masa Depan", title_x=0.5)
-
-    prediction_col = st.columns((2, 0.2, 3))
-    
-    # Display dataframe
-    with prediction_col[0]:
-        st.markdown('Data Prediksi')
-        st.dataframe(data_hasil, height=320, use_container_width=True)
-
-    # Display scatter plot of actual vs predicted values
-    with prediction_col[2]:
-        st.markdown('Visualisasi')
-        st.pyplot(plt, use_container_width=True)
-        # st.pyplot(fig, use_container_width=True)
-
     fig.show()
 
     
