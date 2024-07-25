@@ -445,7 +445,7 @@ if example_data:
                              mode='lines', line=dict(color='red'), name='Prediksi'))
     
     fig.update_traces(line=dict(width=2))  # Customize line width
-    fig.update_layout(yaxis_title='Suhu', xaxis_title='Tanggal', height=500, title="Hasil Prediksi 1 Tahun Ke Masa Depan", title_x=0.5)
+    fig.update_layout(yaxis_title='Suhu', xaxis_title='Tanggal', height=500, title="Hasil Prediksi 1 Tahun Ke Masa Depan")
 
     st.plotly_chart(fig, use_container_width=True)
 
