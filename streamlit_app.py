@@ -431,7 +431,7 @@ if example_data:
     plt.ylabel('Suhu')
     plt.legend()
 
-    # UPDATES
+    # UPDATES 25/07/2024
     ## Interactive Plot with Plotly Go Scatter
     
     historical_data = climate_data['Tx'][2950:]
@@ -447,13 +447,13 @@ if example_data:
     fig.update_traces(line=dict(width=2))  # Customize line width
     fig.update_layout(yaxis_title='Suhu', xaxis_title='Tanggal', height=500, title="Hasil Prediksi 1 Tahun Ke Masa Depan", title_x=0.5)
 
-    st.markdown('Visualisasi')
     st.plotly_chart(fig, use_container_width=True)
 
     st.markdown('Data Hasil Prediksi')
     st.dataframe(data_hasil, use_container_width=True)
-    
-    prediction_col = st.columns((2, 0.2, 3))
+
+    # OLD CODES
+    # prediction_col = st.columns((2, 0.2, 3))
     # Display dataframe
     # with prediction_col[0]:
         # st.markdown('Data Prediksi')
