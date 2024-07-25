@@ -455,10 +455,12 @@ if example_data:
         st.dataframe(data_hasil, height=320, use_container_width=True)
 
     # Display scatter plot of actual vs predicted values
-    with prediction_col[2]:
-        st.markdown('Visualisasi')
+    # with prediction_col[2]:
+        # st.markdown('Visualisasi')
         # st.pyplot(plt, use_container_width=True)
-        st.plotly_chart(fig, use_container_width=True)
+
+    st.markdown('Visualisasi')
+    st.plotly_chart(fig, use_container_width=True)
     
 # Ask for CSV upload if none is detected
 else:
