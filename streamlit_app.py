@@ -431,6 +431,8 @@ if example_data:
     plt.ylabel('Suhu')
     plt.legend()
 
+    prediction_col = st.columns((2, 0.2, 3))
+    
     # Display dataframe
     with prediction_col[0]:
         st.markdown('Data Prediksi')
