@@ -434,21 +434,21 @@ if example_data:
     # UPDATES
     ## Interactive Plot with Plotly Go Scatter
     
-    historical_data = climate_data['Tx'][2950:]
-    combined_data = pd.concat([historical_data, pd.Series(data_hasil['Prediksi'], index=data_hasil.index)])
+    # historical_data = climate_data['Tx'][2950:]
+    # combined_data = pd.concat([historical_data, pd.Series(data_hasil['Prediksi'], index=data_hasil.index)])
     
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(x=combined_data.index[:1099], y=combined_data[:1099],
-                             mode='lines', line=dict(color='#134B70'), name='Data Historis'))
+    # fig = go.Figure()
+    # fig.add_trace(go.Scatter(x=combined_data.index[:1099], y=combined_data[:1099],
+                             # mode='lines', line=dict(color='#134B70'), name='Data Historis'))
     
-    fig.add_trace(go.Scatter(x=combined_data.index[1099:], y=combined_data[1099:],
-                             mode='lines', line=dict(color='red'), name='Prediksi'))
+    # fig.add_trace(go.Scatter(x=combined_data.index[1099:], y=combined_data[1099:],
+                             # mode='lines', line=dict(color='red'), name='Prediksi'))
     
-    fig.update_traces(line=dict(width=2))  # Customize line width
-    fig.update_layout(yaxis_title='Suhu', xaxis_title='Tanggal', height=600, title="Hasil Prediksi 1 Tahun Ke Masa Depan", title_x=0.5)
-    fig.show()
+    # fig.update_traces(line=dict(width=2))  # Customize line width
+    # fig.update_layout(yaxis_title='Suhu', xaxis_title='Tanggal', height=600, title="Hasil Prediksi 1 Tahun Ke Masa Depan", title_x=0.5)
+    # fig.show()
 
-    prediction_col = st.columns((2, 0.2, 3))
+    # prediction_col = st.columns((2, 0.2, 3))
     
     # Display dataframe
     with prediction_col[0]:
@@ -458,8 +458,8 @@ if example_data:
     # Display scatter plot of actual vs predicted values
     with prediction_col[2]:
         st.markdown('Visualisasi')
-        # st.pyplot(plt, use_container_width=True) old
-        st.pyplot(fig, use_container_width=True)
+        st.pyplot(plt, use_container_width=True)
+        # st.pyplot(fig, use_container_width=True)
 
     
 # Ask for CSV upload if none is detected
