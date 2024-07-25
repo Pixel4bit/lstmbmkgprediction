@@ -445,13 +445,13 @@ if example_data:
                              mode='lines', line=dict(color='red'), name='Prediksi'))
     
     fig.update_traces(line=dict(width=2))  # Customize line width
-    fig.update_layout(yaxis_title='Suhu', xaxis_title='Tanggal', height=300, title="Hasil Prediksi 1 Tahun Ke Masa Depan", title_x=0.5)
+    fig.update_layout(yaxis_title='Suhu', xaxis_title='Tanggal', height=500, title="Hasil Prediksi 1 Tahun Ke Masa Depan", title_x=0.5)
 
     st.markdown('Visualisasi')
     st.plotly_chart(fig, use_container_width=True)
 
     st.markdown('Data Hasil Prediksi')
-    st.dataframe(data_hasil, width=300)
+    st.dataframe(data_hasil, width=600)
     
     prediction_col = st.columns((2, 0.2, 3))
     # Display dataframe
