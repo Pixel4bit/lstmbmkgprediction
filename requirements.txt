@@ -6,3 +6,4 @@ tensorflow
 keras
 scikit-learn
 altair>=4.0
+plotly
