@@ -446,21 +446,24 @@ if example_data:
     
     fig.update_traces(line=dict(width=2))  # Customize line width
     fig.update_layout(yaxis_title='Suhu', xaxis_title='Tanggal', height=600, title="Hasil Prediksi 1 Tahun Ke Masa Depan", title_x=0.5)
-    fig.show()
 
+    st.markdown('Visualisasi')
+    st.plotly_chart(fig, use_container_width=True)
+
+    st.markdown('Data Hasil Prediksi')
+    st.dataframe(data_hasil)
+    
     prediction_col = st.columns((2, 0.2, 3))
     # Display dataframe
-    with prediction_col[0]:
-        st.markdown('Data Prediksi')
-        st.dataframe(data_hasil, height=320, use_container_width=True)
+    # with prediction_col[0]:
+        # st.markdown('Data Prediksi')
+        # st.dataframe(data_hasil, height=320, use_container_width=True)
 
     # Display scatter plot of actual vs predicted values
     # with prediction_col[2]:
         # st.markdown('Visualisasi')
         # st.pyplot(plt, use_container_width=True)
 
-    st.markdown('Visualisasi')
-    st.plotly_chart(fig, use_container_width=True)
     
 # Ask for CSV upload if none is detected
 else:
