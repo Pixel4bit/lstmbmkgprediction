@@ -433,21 +433,30 @@ if example_data:
 
     # UPDATES 25/07/2024
     ## Interactive Plot with Plotly Go Scatter
+    if n_data == True:
+      historical_data = climate_data['Tx'][2950:]
+      combined_data = pd.concat([historical_data, pd.Series(data_hasil['Prediksi'], index=data_hasil.index)])
+      fig = go.Figure()
+      fig.add_trace(go.Scatter(x=combined_data.index[:1254], y=combined_data[:1254],
+                               mode='lines', line=dict(color='#134B70'), name='Data Historis'))
+      fig.add_trace(go.Scatter(x=combined_data.index[1254:], y=combined_data[1254:],
+                               mode='lines', line=dict(color='red'), name='Prediksi'))
+      fig.update_traces(line=dict(width=2))  # Customize line width
+      fig.update_layout(yaxis_title='Suhu', xaxis_title='Tanggal', height=500, title=f"Hasil Prediksi {future} Hari Ke Masa Depan")
+      st.plotly_chart(fig, use_container_width=True)
     
-    historical_data = climate_data['Tx'][2950:]
-    combined_data = pd.concat([historical_data, pd.Series(data_hasil['Prediksi'], index=data_hasil.index)])
-    
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(x=combined_data.index[:1099], y=combined_data[:1099],
-                             mode='lines', line=dict(color='#134B70'), name='Data Historis'))
-    
-    fig.add_trace(go.Scatter(x=combined_data.index[1099:], y=combined_data[1099:],
-                             mode='lines', line=dict(color='red'), name='Prediksi'))
-    
-    fig.update_traces(line=dict(width=2))  # Customize line width
-    fig.update_layout(yaxis_title='Suhu', xaxis_title='Tanggal', height=500, title="Hasil Prediksi 1 Tahun Ke Masa Depan")
-
-    st.plotly_chart(fig, use_container_width=True)
+    else:
+      historical_data = climate_data['Tx'][2950:]
+      combined_data = pd.concat([historical_data, pd.Series(data_hasil['Prediksi'], index=data_hasil.index)])
+      fig = go.Figure()
+      fig.add_trace(go.Scatter(x=combined_data.index[:1099], y=combined_data[:1099],
+                               mode='lines', line=dict(color='#134B70'), name='Data Historis'))
+      fig.add_trace(go.Scatter(x=combined_data.index[1099:], y=combined_data[1099:],
+                               mode='lines', line=dict(color='red'), name='Prediksi'))
+      fig.update_traces(line=dict(width=2))  # Customize line width
+      fig.update_layout(yaxis_title='Suhu', xaxis_title='Tanggal', height=500, title=f"Hasil Prediksi {future} Hari Ke Masa Depan")
+      st.plotly_chart(fig, use_container_width=True)
+      
 
     st.markdown('Data Hasil Prediksi')
     st.dataframe(data_hasil, use_container_width=True)
