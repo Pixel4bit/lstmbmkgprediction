@@ -457,9 +457,10 @@ if example_data:
     # Display scatter plot of actual vs predicted values
     with prediction_col[2]:
         st.markdown('Visualisasi')
-        fig.show()
-        # st.pyplot(plt, use_container_width=True)
+        st.pyplot(plt, use_container_width=True)
         # st.pyplot(fig, use_container_width=True)
+
+    fig.show()
 
     
 # Ask for CSV upload if none is detected
