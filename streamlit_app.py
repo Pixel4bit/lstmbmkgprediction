@@ -428,7 +428,10 @@ if example_data:
     fig.add_traces(go.Scatter(x=data_hasil.index, y=data_hasil['Prediksi'], mode='lines', line=dict(color='red', width=2), name='Prediksi'))
     fig.update_layout(height=600, title=f'Hasil Prediksi {future} Hari ke Masa Depan', title_x=0.5, xaxis_title='Tanggal', yaxis_title='Suhu')
     fig.show()
-      
+
+    st.markdown('Visualisasi')
+    st.plotly_chart(fig, use_container_width=True)
+  
     st.markdown('Data Hasil Prediksi')
     st.dataframe(data_hasil, use_container_width=True)
     
