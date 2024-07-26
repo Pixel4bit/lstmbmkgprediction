@@ -426,7 +426,7 @@ if example_data:
     fig = go.Figure()
     fig.add_traces(go.Scatter(x=climate_data.index[2200:], y=climate_data['Tx'][2200:], mode='lines', line=dict(color='#134B70', width=2), name='Data Historis'))
     fig.add_traces(go.Scatter(x=data_hasil.index, y=data_hasil['Prediksi'], mode='lines', line=dict(color='red', width=2), name='Prediksi'))
-    fig.update_layout(height=600, title=f'Hasil Prediksi {future} Hari ke Masa Depan', title_x=0.5, xaxis_title='Tanggal', yaxis_title='Suhu')
+    fig.update_layout(height=400, title=f'Hasil Prediksi {future} Hari ke Masa Depan', title_x=0.5, xaxis_title='Tanggal', yaxis_title='Suhu')
     fig.show()
 
     st.markdown('Visualisasi')
