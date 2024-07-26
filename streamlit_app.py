@@ -402,8 +402,8 @@ if example_data:
             st.plotly_chart(fig, use_container_width=True)
 
     fig = go.Figure()
-    fig.add_traces(go.Scatter(x=dataY.index[::10], y=dataY['Aktual'][::10], mode='lines', line=dict(color='#134B70'), name='Aktual'))
-    fig.add_traces(go.Scatter(x=dataY.index[::10], y=dataY['Prediksi'][::10], mode='lines', line=dict(color='red'), name='Prediksi'))
+    fig.add_traces(go.Scatter(x=dataY.index, y=dataY['Aktual'], mode='lines', line=dict(color='#134B70'), name='Aktual'))
+    fig.add_traces(go.Scatter(x=dataY.index, y=dataY['Prediksi'], mode='lines', line=dict(color='red'), name='Prediksi'))
     fig.update_layout(height=400, title='Tingkat Akurasi antara Data Uji Aktual dan Data Uji Prediksi', xaxis_title='Jumlah Data', yaxis_title='Suhu')
     fig.update_traces(line=dict(width=2))
     fig.show()
