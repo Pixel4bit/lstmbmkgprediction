@@ -336,16 +336,16 @@ if example_data:
             st.markdown('**y**')
             st.dataframe(data_test_y, height=210, hide_index=True, use_container_width=True)
     
-    plt.figure(figsize= (20,7), dpi=200)
-    plt.title('Perbandingan Data latih dan Data Uji', fontsize=20)
-    plt.plot(climate_data['Tx'][:train_size], label='Data Latih')
-    plt.plot(climate_data['Tx'][train_size:], label='Data Uji')
-    plt.xlabel('Tahun', fontsize=14)
-    plt.ylabel('Suhu', fontsize=14)
-    plt.legend(loc='lower right', fontsize=14)
+    fig = go.Figure()
+    fig.add_traces(go.Scatter(x=climate_data.index[:train_size], y=climate_data['Tx'][:train_size], mode='lines', line=dict(color='#134B70'), name='Data Latih'))
+    fig.add_traces(go.Scatter(x=climate_data.index[train_size:], y=climate_data['Tx'][train_size:], mode='lines', line=dict(color='red'), name='Data Uji'))
+    fig.update_layout(height=400, title='Perbandingan Data latih dan Data Uji', xaxis_title='Tahun', yaxis_title='Suhu')
+    fig.update_traces(line=dict(width=2))
+    fig.show()
     
     with st.expander('Perbandingan Data latih dan Uji'):
-        st.pyplot(plt, use_container_width=True)
+        # st.pyplot(plt, use_container_width=True)
+        st.plotly_chart(fig, use_container_width=True)
         
 
     # Download Zip dataset files
