@@ -402,7 +402,7 @@ if example_data:
     fig = go.Figure()
     fig.add_traces(go.Scatter(x=dataX.index[::10], y=dataX['Aktual'][::10], mode='lines', line=dict(color='#134B70'), name='Aktual'))
     fig.add_traces(go.Scatter(x=dataX.index[::10], y=dataX['Prediksi'][::10], mode='lines', line=dict(color='red'), name='Prediksi'))
-    fig.update_layout(height=300, title='Tingkat Akurasi antara Data Latih Aktual dan Data Latih Prediksi', xaxis_title='Jumlah Data', yaxis_title='Suhu')
+    fig.update_layout(height=400, title='Tingkat Akurasi antara Data Latih Aktual dan Data Latih Prediksi', xaxis_title='Jumlah Data', yaxis_title='Suhu')
     fig.update_traces(line=dict(width=2))
     fig.show()
   
