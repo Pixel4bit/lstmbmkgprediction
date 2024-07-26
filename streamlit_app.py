@@ -421,58 +421,16 @@ if example_data:
     col[2].metric(label="Suhu Tertinggi", value=f'{round(float(data_hasil.max()), 2)}°', delta=f'{round(anomali_suhu_tertinggi, 2)}', delta_color="inverse")
     col[3].metric(label="Suhu Rata-rata", value=f'{round(float(data_hasil.mean()), 2)}°', delta=f'{round(anomali_suhu_rata_rata, 2)}', delta_color="inverse")
     
-    plt.figure(figsize=(10, 4), dpi=200)
-    plt.plot(climate_data['Tx'][2950:], label='Data Historis')
-    plt.plot(data_hasil['Prediksi'], label='Prediksi')
-    plt.gca().set_facecolor(color='white')
-    plt.gcf().set_facecolor(color='white')
-    plt.title(f'Hasil Prediksi Suhu Jakarta {future} hari')
-    plt.xlabel('Tahun')
-    plt.ylabel('Suhu')
-    plt.legend()
-
     # UPDATES 25/07/2024
     ## Interactive Plot with Plotly Go Scatter
-    if n_data == True:
-      historical_data = climate_data['Tx'][2950:]
-      combined_data = pd.concat([historical_data, pd.Series(data_hasil['Prediksi'], index=data_hasil.index)])
-      fig = go.Figure()
-      fig.add_trace(go.Scatter(x=combined_data.index[:1254], y=combined_data[:1254],
-                               mode='lines', line=dict(color='#134B70'), name='Data Historis'))
-      fig.add_trace(go.Scatter(x=combined_data.index[1254:], y=combined_data[1254:],
-                               mode='lines', line=dict(color='red'), name='Prediksi'))
-      fig.update_traces(line=dict(width=2))  # Customize line width
-      fig.update_layout(yaxis_title='Suhu', xaxis_title='Tanggal', height=500, title=f"Hasil Prediksi {future} Hari Ke Masa Depan")
-      st.plotly_chart(fig, use_container_width=True)
-    
-    else:
-      historical_data = climate_data['Tx'][2950:]
-      combined_data = pd.concat([historical_data, pd.Series(data_hasil['Prediksi'], index=data_hasil.index)])
-      fig = go.Figure()
-      fig.add_trace(go.Scatter(x=combined_data.index[:1099], y=combined_data[:1099],
-                               mode='lines', line=dict(color='#134B70'), name='Data Historis'))
-      fig.add_trace(go.Scatter(x=combined_data.index[1099:], y=combined_data[1099:],
-                               mode='lines', line=dict(color='red'), name='Prediksi'))
-      fig.update_traces(line=dict(width=2))  # Customize line width
-      fig.update_layout(yaxis_title='Suhu', xaxis_title='Tanggal', height=500, title=f"Hasil Prediksi {future} Hari Ke Masa Depan")
-      st.plotly_chart(fig, use_container_width=True)
+    fig = go.Figure()
+    fig.add_traces(go.Scatter(x=climate_data.index[2200:], y=climate_data['Tx'][2200:], mode='lines', line=dict(color='#134B70', width=2), name='Data Historis'))
+    fig.add_traces(go.Scatter(x=data_hasil.index, y=data_hasil['Prediksi'], mode='lines', line=dict(color='red', width=2), name='Prediksi'))
+    fig.update_layout(height=600, title=f'Hasil Prediksi {future} Hari ke Masa Depan', title_x=0.5, xaxis_title='Tanggal', yaxis_title='Suhu')
+    fig.show()
       
-
     st.markdown('Data Hasil Prediksi')
     st.dataframe(data_hasil, use_container_width=True)
-
-    # OLD CODES
-    # prediction_col = st.columns((2, 0.2, 3))
-    # Display dataframe
-    # with prediction_col[0]:
-        # st.markdown('Data Prediksi')
-        # st.dataframe(data_hasil, height=320, use_container_width=True)
-
-    # Display scatter plot of actual vs predicted values
-    # with prediction_col[2]:
-        # st.markdown('Visualisasi')
-        # st.pyplot(plt, use_container_width=True)
-
     
 # Ask for CSV upload if none is detected
 else:
