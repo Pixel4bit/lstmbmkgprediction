@@ -365,35 +365,35 @@ if example_data:
     
     tn = go.Figure()
     tn.add_traces(go.Scatter(x= rolling_avg_tn.index, y=rolling_avg_tn, mode='lines', line=dict(color='blue', width=2), name='Suhu Terendah'))
-    tn.update_layout(height=400, title='Tren Perubahan Suhu Terendah', xaxis_title='Jumlah Data', yaxis_title='Suhu')
+    tn.update_layout(height=400, title='Tren Perubahan Suhu Terendah', xaxis_title='Tahun', yaxis_title='Suhu')
 
     tx = go.Figure()
     tx.add_traces(go.Scatter(x= rolling_avg_tx.index, y=rolling_avg_tx, mode='lines', line=dict(color='red', width=2), name='Suhu Tertinggi'))
-    tx.update_layout(height=400, title='Tren Perubahan Suhu Tertinggi', xaxis_title='Jumlah Data', yaxis_title='Suhu')
+    tx.update_layout(height=400, title='Tren Perubahan Suhu Tertinggi', xaxis_title='Tahun', yaxis_title='Suhu')
 
     tavg = go.Figure()
     tavg.add_traces(go.Scatter(x= rolling_avg_tavg.index, y=rolling_avg_tavg, mode='lines', line=dict(color='green', width=2), name='Suhu Rata-rata'))
-    tavg.update_layout(height=400, title='Tren Perubahan Suhu Rata-rata', xaxis_title='Jumlah Data', yaxis_title='Suhu')
+    tavg.update_layout(height=400, title='Tren Perubahan Suhu Rata-rata', xaxis_title='Tahun', yaxis_title='Suhu')
 
     rhavg = go.Figure()
     rhavg.add_traces(go.Scatter(x= rolling_avg_rhavg.index, y=rolling_avg_rhavg, mode='lines', line=dict(color='#803D3B', width=2), name='Kelembapan'))
-    rhavg.update_layout(height=400, title='Tren Perubahan Kelembapan', xaxis_title='Jumlah Data', yaxis_title='%')
+    rhavg.update_layout(height=400, title='Tren Perubahan Kelembapan', xaxis_title='Tahun', yaxis_title='%')
 
     rr = go.Figure()
     rr.add_traces(go.Scatter(x= rolling_avg_rr.index, y=rolling_avg_rr, mode='lines', line=dict(width=2), name='Curah Hujan'))
-    rr.update_layout(height=400, title='Tren Perubahan Curah Hujan', xaxis_title='Jumlah Data', yaxis_title='mm')
+    rr.update_layout(height=400, title='Tren Perubahan Curah Hujan', xaxis_title='Tahun', yaxis_title='mm')
 
     ss = go.Figure()
     ss.add_traces(go.Scatter(x= rolling_avg_ss.index, y=rolling_avg_ss, mode='lines', line=dict(color='red', width=2), name='Penyinaran Matahari'))
-    ss.update_layout(height=400, title='Tren Penyinaran Matahari', xaxis_title='Jumlah Data', yaxis_title='Jam')
+    ss.update_layout(height=400, title='Tren Penyinaran Matahari', xaxis_title='Tahun', yaxis_title='Jam')
 
     ffx = go.Figure()
     ffx.add_traces(go.Scatter(x= rolling_avg_ffx.index, y=rolling_avg_ffx, mode='lines', line=dict(color='blue', width=2), name='Kecepatan Angin Maksimum'))
-    ffx.update_layout(height=400, title='Tren Kecepatan Angin Maksimum', xaxis_title='Jumlah Data', yaxis_title='m/s')
+    ffx.update_layout(height=400, title='Tren Kecepatan Angin Maksimum', xaxis_title='Tahun', yaxis_title='m/s')
 
     ffavg = go.Figure()
     ffavg.add_traces(go.Scatter(x= rolling_avg_ffavg.index, y=rolling_avg_ffavg, mode='lines', line=dict(width=2), name='Kecepatan Angin rata-rata'))
-    ffavg.update_layout(height=400, title='Tren Kecepatan Angin rata-rata', xaxis_title='Jumlah Data', yaxis_title='m/s')
+    ffavg.update_layout(height=400, title='Tren Kecepatan Angin rata-rata', xaxis_title='Tahun', yaxis_title='m/s')
 
     with st.expander('Visualisasi Data Analisis'):
         st.plotly_chart(tn, use_container_width=True)
