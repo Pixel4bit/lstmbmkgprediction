@@ -486,7 +486,6 @@ if example_data:
     fig.update_layout(height=500, title=f'Hasil Prediksi {future} Hari ke Masa Depan', xaxis_title='Tanggal', yaxis_title='Suhu')
     fig.show()
 
-    st.markdown('Visualisasi')
     st.plotly_chart(fig, use_container_width=True)
   
     st.markdown('Data Hasil Prediksi')
