@@ -17,10 +17,6 @@ import zipfile
 
 # parameter
 
-data_latih_x = pd.read_csv('https://raw.githubusercontent.com/Pixel4bit/Data-BMKG/main/hasil/csv/data_latih_x.csv')
-data_latih_y = pd.read_csv('https://raw.githubusercontent.com/Pixel4bit/Data-BMKG/main/hasil/csv/data_latih_y.csv')
-data_test_x = pd.read_csv('https://raw.githubusercontent.com/Pixel4bit/Data-BMKG/main/hasil/csv/data_tes_x.csv')
-data_test_y = pd.read_csv('https://raw.githubusercontent.com/Pixel4bit/Data-BMKG/main/hasil/csv/data_tes_y.csv')
 data_februari = 'https://raw.githubusercontent.com/Pixel4bit/Data-BMKG/main/Raw_Dataset_BMKG_2013_2024_Jakarta_Pusat.csv'
 data_juni = 'https://raw.githubusercontent.com/Pixel4bit/Data-BMKG/main/dataset_2024-6/raw_dataset_bmkg_2013_2024-06_jakarta_pusat.csv'
 data_juli = 'https://raw.githubusercontent.com/Pixel4bit/Data-BMKG/main/dataset_2024-07/raw_dataset_bmkg_2013_2024-07-05_jakarta_pusat.csv'
@@ -165,6 +161,15 @@ if example_data:
         data_untuk_dilatih = dataset[:train_size]
         data_untuk_ditest = dataset[train_size:]
 
+        data_untuk_dilatih = dataset[:train_size]
+        data_untuk_ditest = dataset[train_size:]
+
+        data_latih_x = data_untuk_dilatih.drop(columns=['Tx'], axis=1)
+        data_latih_y = data_untuk_dilatih['Tx']
+
+        data_test_x = data_untuk_ditest.drop(columns=['Tx'], axis=1)
+        data_test_y = data_untuk_ditest['Tx']
+      
         st.write("Normalisasi data ...")
         time.sleep(sleep_time)
 
